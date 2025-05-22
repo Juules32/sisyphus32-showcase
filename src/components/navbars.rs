@@ -1,28 +1,27 @@
 use dioxus::prelude::*;
-use crate::Route;
+use crate::{components::{navlink::NavLink, Layout}, Route};
 
 #[component]
 pub fn OuterNavbar() -> Element {
     rsx! {
         div {
-            id: "navbar",
-            Link { to: Route::Home {}, "Home" }
-            Link { to: Route::AboutApps {}, "Apps" }
+            class: "navbar outer",
+            NavLink { to: Route::Home {}, label: "Home", is_outer: true }
+            NavLink { to: Route::AboutApps {}, label: "Apps", is_outer: true }
         }
 
         Outlet::<Route> {}
     }
 }
 
-/// Shared navbar component.
 #[component]
 pub fn AppsNavbar() -> Element {
     rsx! {
         div {
-            id: "navbar",
-            Link { to: Route::AboutApps {}, "About" }
-            Link { to: Route::PokeLink {}, "PokéLink" }
-            Link { to: Route::WordGuessr {}, "WordGuessr" }
+            class: "navbar inner",
+            NavLink { to: Route::AboutApps {}, label: "About", is_outer: false }
+            NavLink { to: Route::PokeLink {}, label: "PokéLink", is_outer: false }
+            NavLink { to: Route::WordGuessr {}, label: "WordGuessr", is_outer: false }
         }
 
         Outlet::<Route> {}

@@ -1,8 +1,12 @@
 use dioxus::prelude::*;
 
+use crate::components::Layout;
+
 #[component]
 pub fn WordGuessr() -> Element {
     rsx! {
-        "Word Guessr page!"
+        Layout {
+            iframe { src: "https://wordguessr.juules32.com/" }
+        }
     }
 }

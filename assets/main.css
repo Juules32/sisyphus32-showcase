@@ -1,72 +1,91 @@
 /* App-wide styling */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+
 body {
-    background-color: #0f1116;
-    color: #ffffff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 20px;
+    font-family: 'EB Garamond', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0px;
+    background-color: #ccccd7;
 }
 
-#hero {
-    margin: 0;
+h1, h2, h3, h4, h5 {
+    color: #551a8b;                   /* Purpl burglur alurm */
+}
+
+.navbar {
+
+    background-color: white;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+    height: 50px;
+    box-shadow: 0 4px 5px -2px gray;
+}
+
+iframe {
+    width: 100%;
+    height: 500px;
+}
+
+.navlink {
+    position: relative;
+    padding: 6px 10px;
+    margin: 0px 5px;
+    text-align: center;
+    text-decoration: none;
+    color: #551a8b;
+    background-image: linear-gradient(to top, #dddddd, transparent);
+    background-size: 100% 0%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    border-radius: 10px;
+    transition: background-size 0.2s ease, color 0.2s ease;
+}
+
+.navbar a:hover {
+    background-size: 100% 100%; /* Animate gradient upwards */
+    color: #000000;
+    cursor: pointer;
+}
+
+.navlink.active {
+    background-size: 100% 100%; /* Animate gradient upwards */
+    color: #000000;
+    size: 100px;
+}
+
+.navbar.outer {
+    z-index: 3;
+    position: sticky;
+    top: 0;
+    border-radius: 0px 0px 15px 15px;
+}
+
+.navbar.inner {
+    z-index: 2;
+    position: sticky;
+    top: 50;
+    padding-top: 15px;
+    transform: translateY(-15px);
+    background-color: #eeeef9;
+    border-radius: 0px 0px 15px 15px;
+}
+
+#layout-content {
+    transform: translateY(-15px);
+    box-sizing: border-box;
+    background-color: #ffffff;
+    max-width: 1000px;                   /* Excluding padding */
+    width: calc(75%);       /* Excluding padding */
+    margin-bottom: 4%;                 /* A little space at the bottom */
+    padding: max(5%, 20px);                      /* Gotta have padding! */
+    box-shadow: 4px 4px 10px 2px gray;
+    border-radius: 0px 0px 15px 15px;
+}
+
+#layout-background {
+    /* Center content! */
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
-
-#links {
-    width: 400px;
-    text-align: left;
-    font-size: x-large;
-    color: white;
-    display: flex;
-    flex-direction: column;
-}
-
-#links a {
-    color: white;
-    text-decoration: none;
-    margin-top: 20px;
-    margin: 10px 0px;
-    border: white 1px solid;
-    border-radius: 5px;
-    padding: 10px;
-}
-
-#links a:hover {
-    background-color: #1f1f1f;
-    cursor: pointer;
-}
-
-#header {
-    max-width: 1200px;
-}
-
-/* Navbar */
-#navbar {
-    display: flex;
-    flex-direction: row;
-  }
-  
-#navbar a {
-    color: #ffffff;
-    margin-right: 20px;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-#navbar a:hover {
-    cursor: pointer;
-    color: #91a4d2;
-}
-
-/* Blog page */
-#blog {
-    margin-top: 50px;
-  }
-  
-#blog a {
-    color: #ffffff;
-    margin-top: 50px;
-}
-

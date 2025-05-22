@@ -2,6 +2,7 @@ mod components;
 
 use components::*;
 use dioxus::prelude::*;
+use dioxus_logger::tracing;
 
 const FAVICON: Asset = asset!("/assets/favicon.ico");
 const MAIN_CSS: Asset = asset!("/assets/main.css");
@@ -12,7 +13,7 @@ enum Route {
     #[layout(OuterNavbar)]
         #[route("/")]
         Home {},
-        #[nest("/ding")]
+        #[nest("/apps")]
             #[layout(AppsNavbar)]
             #[route("/")]
             AboutApps {},
@@ -28,6 +29,7 @@ enum Route {
 }
 
 fn main() {
+    tracing::debug!("Rendering app!");
     dioxus::launch(App);
 }
 
