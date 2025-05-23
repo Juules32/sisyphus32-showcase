@@ -17,5 +17,6 @@ mod_and_use!(
     layout,
     gamejams,
     bsc,
-    msc
+    msc,
+    lorem
 );

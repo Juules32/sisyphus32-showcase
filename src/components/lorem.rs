@@ -1,0 +1,9 @@
+use dioxus::prelude::*;
+
+/// Home page
+#[component]
+pub fn Lorem() -> Element {
+    rsx! {
+        p {  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent pulvinar, sapien vitae semper convallis, nisl neque venenatis ipsum, eget finibus lorem leo at neque. Phasellus id sem elit. Donec porta libero nec orci elementum, et fringilla nisi fermentum. In faucibus lacinia interdum. Sed suscipit, leo sed iaculis bibendum, felis orci viverra magna, non viverra risus sem vitae lacus. Integer imperdiet vulputate diam, ut aliquam purus bibendum non. Morbi molestie enim et gravida commodo. Nullam consectetur, nisi at pretium pharetra, orci dolor placerat augue, posuere pretium dolor tellus vel metus. In hac habitasse platea dictumst. Etiam nisl ligula, tincidunt vel lacus sed, convallis ullamcorper ante. Suspendisse et lacus ex." }
+    }
+}

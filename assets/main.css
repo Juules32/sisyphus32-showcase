@@ -18,7 +18,7 @@ h1, h2, h3, h4, h5 {
     align-items: center;
     position: relative;
     justify-content: center;
-    height: 50px;
+    min-height: 50px;
     box-shadow: 0 4px 5px -2px gray;
 }
 
@@ -42,8 +42,12 @@ iframe {
     height: 500px;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 600px) {
     #pokelink {
+        display: none;
+    }
+
+    #wordguessr {
         display: none;
     }
 }
