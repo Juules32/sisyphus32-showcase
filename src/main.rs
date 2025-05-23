@@ -2,7 +2,6 @@ mod components;
 
 use components::*;
 use dioxus::prelude::*;
-use dioxus_logger::tracing;
 
 const FAVICON: Asset = asset!("/assets/favicon.ico");
 const MAIN_CSS: Asset = asset!("/assets/main.css");
@@ -13,14 +12,22 @@ enum Route {
     #[layout(OuterNavbar)]
         #[route("/")]
         Home {},
-        #[nest("/apps")]
-            #[layout(AppsNavbar)]
-            #[route("/")]
-            AboutApps {},
-            #[route("/pokelink")]
-            PokeLink {},
-            #[route("/wordguessr")]
-            WordGuessr {},
+        #[nest("/itu")]
+            #[layout(ItuNavbar)]
+                #[route("/bsc")]
+                BSc {},
+                #[route("/msc")]
+                MSc {},
+            #[end_layout]
+        #[end_nest]
+        #[nest("/projects")]
+            #[layout(ProjectsNavbar)]
+                #[route("/")]
+                AboutProjects {},
+                #[route("/apps")]
+                WebApps {},
+                #[route("/jams")]
+                GameJams {},
             #[end_layout]
         #[end_nest]
     #[end_layout]
@@ -29,7 +36,6 @@ enum Route {
 }
 
 fn main() {
-    tracing::debug!("Rendering app!");
     dioxus::launch(App);
 }
 
@@ -46,6 +52,9 @@ fn App() -> Element {
 fn PageNotFound(route: Vec<String>) -> Element {
     let route_string = route.join("/");
     rsx! {
-        "Route: {route_string} not found!"
+        Layout {
+            h2 { "Route: \"{route_string}\" not found!" }
+            Link { to: "/", "Go to home page" }
+        }
     }
 }

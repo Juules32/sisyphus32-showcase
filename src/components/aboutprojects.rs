@@ -3,7 +3,7 @@ use dioxus::prelude::*;
 use crate::components::Layout;
 
 #[component]
-pub fn AboutApps() -> Element {
+pub fn AboutProjects() -> Element {
     rsx! {
         Layout {
             h1 { "About!" }

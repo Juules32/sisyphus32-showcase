@@ -1,14 +1,21 @@
-mod navbars;
-mod home;
-mod aboutapps;
-mod pokelink;
-mod wordguessr;
-mod layout;
-mod navlink;
+macro_rules! mod_and_use {
+    ($($name:ident),*) => {
+        $(
+            mod $name;
+            #[allow(unused_imports)]
+            pub use $name::*;
+        )*
+    };
+}
 
-pub use navbars::*;
-pub use home::*;
-pub use aboutapps::*;
-pub use pokelink::*;
-pub use wordguessr::*;
-pub use layout::*;
+mod_and_use!(
+    navbars,
+    navlink,
+    home,
+    aboutprojects,
+    webapps,
+    layout,
+    gamejams,
+    bsc,
+    msc
+);

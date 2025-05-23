@@ -8,11 +8,11 @@ body {
 }
 
 h1, h2, h3, h4, h5 {
-    color: #551a8b;                   /* Purpl burglur alurm */
+    color: #551a8b;                                         /* Purpl burglur alurm */
 }
 
 .navbar {
-
+    overflow-x: auto;
     background-color: white;
     display: flex;
     align-items: center;
@@ -22,9 +22,30 @@ h1, h2, h3, h4, h5 {
     box-shadow: 0 4px 5px -2px gray;
 }
 
+@media (max-width: 600px) {
+    .navbar {
+        justify-content: start;
+    }
+}
+
 iframe {
     width: 100%;
+    border: 2px solid gray;
+    border-radius: 10px;
+}
+
+#pokelink {
+    height: 600px;
+}
+
+#wordguessr {
     height: 500px;
+}
+
+@media (max-width: 750px) {
+    #pokelink {
+        display: none;
+    }
 }
 
 .navlink {
@@ -43,15 +64,16 @@ iframe {
 }
 
 .navbar a:hover {
-    background-size: 100% 100%; /* Animate gradient upwards */
+    background-size: 100% 100%;                             /* Animate gradient upwards */
     color: #000000;
     cursor: pointer;
 }
 
 .navlink.active {
-    background-size: 100% 100%; /* Animate gradient upwards */
+    background-size: 100% 100%;                             /* Animate gradient upwards */
     color: #000000;
     size: 100px;
+    text-shadow:0px 0px 0.5px black;
 }
 
 .navbar.outer {
@@ -74,13 +96,20 @@ iframe {
 #layout-content {
     transform: translateY(-15px);
     box-sizing: border-box;
+    overflow: hidden;
     background-color: #ffffff;
-    max-width: 1000px;                   /* Excluding padding */
-    width: calc(75%);       /* Excluding padding */
-    margin-bottom: 4%;                 /* A little space at the bottom */
-    padding: max(5%, 20px);                      /* Gotta have padding! */
+    max-width: 1000px;                                      /* Excluding padding */
+    width: calc(75%);                                       /* Excluding padding */
+    margin-bottom: 4%;                                      /* A little space at the bottom */
+    padding: max(3%, 5px) max(5%, 20px);                    /* Gotta have padding! */
     box-shadow: 4px 4px 10px 2px gray;
     border-radius: 0px 0px 15px 15px;
+}
+
+@media (max-width: 600px) {
+    #layout-content {
+        width: 92%;
+    }
 }
 
 #layout-background {
