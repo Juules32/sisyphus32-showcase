@@ -13,6 +13,7 @@ enum Route {
         #[route("/")]
         Home {},
         #[nest("/itu")]
+            #[redirect("/", || Route::BSc {})]
             #[layout(ItuNavbar)]
                 #[route("/bsc")]
                 BSc {},
@@ -21,8 +22,9 @@ enum Route {
             #[end_layout]
         #[end_nest]
         #[nest("/projects")]
+            #[redirect("/", || Route::AboutProjects {})]
             #[layout(ProjectsNavbar)]
-                #[route("/")]
+                #[route("/about")]
                 AboutProjects {},
                 #[route("/apps")]
                 WebApps {},

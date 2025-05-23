@@ -38,16 +38,8 @@ iframe {
     height: 600px;
 }
 
-#wordguessr {
-    height: 500px;
-}
-
 @media (max-width: 600px) {
     #pokelink {
-        display: none;
-    }
-
-    #wordguessr {
         display: none;
     }
 }
