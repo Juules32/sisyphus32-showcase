@@ -7,7 +7,7 @@ use crate::components::{Layout, Lorem};
 pub fn Home() -> Element {
     rsx! {
         Layout { 
-            h1 { "Welcome to my page!" }
+            h1 { "Welcome to my page!" },
             Lorem {}
         }
     }

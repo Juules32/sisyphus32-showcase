@@ -18,5 +18,6 @@ mod_and_use!(
     gamejams,
     bsc,
     msc,
-    lorem
+    lorem,
+    chessengines
 );

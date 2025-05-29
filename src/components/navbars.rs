@@ -36,6 +36,7 @@ pub fn ProjectsNavbar() -> Element {
             NavLink { to: Route::AboutProjects {}, label: "About", is_outer: false }
             NavLink { to: Route::WebApps {}, label: "Web Apps", is_outer: false }
             NavLink { to: Route::GameJams {}, label: "Game Jams", is_outer: false }
+            NavLink { to: Route::ChessEngines {}, label: "Chess Engines", is_outer: false }
         }
 
         Outlet::<Route> {}

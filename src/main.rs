@@ -30,6 +30,8 @@ enum Route {
                 WebApps {},
                 #[route("/jams")]
                 GameJams {},
+                #[route("/chess")]
+                ChessEngines {},
             #[end_layout]
         #[end_nest]
     #[end_layout]
