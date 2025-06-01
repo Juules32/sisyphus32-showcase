@@ -17,7 +17,6 @@ const BQ_SVG: Asset = asset!("/assets/piece_svg/BQ.svg");
 const BK_SVG: Asset = asset!("/assets/piece_svg/BK.svg");
 
 static CURRENT_GAME: GlobalSignal<BotGame> = Signal::global(|| {
-    unsafe { sisyphus32::init(); }
     BotGame::new(Color::White, 1000)
 });
 
