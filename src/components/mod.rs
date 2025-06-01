@@ -19,5 +19,6 @@ mod_and_use!(
     bsc,
     msc,
     lorem,
-    chessengines
+    chessengines,
+    chessboard
 );

@@ -9,16 +9,16 @@ edition = "2021"
 [dependencies]
 dioxus = { version = "0.6.0", features = ["router"] }
 dioxus-logger = "0.6.2"
-sisyphus32 = { version = "1.1.1", features = ["all_wasm"] }
-# sisyphus32 = { path = "../sisyphus32" }
+gloo-timers = { version = "0.3.0", features = ["futures"] }
+# sisyphus32 = { version = "1.2.1", features = ["all_wasm"] }
+sisyphus32 = { path = "../sisyphus32", features = ["all_wasm"] }
+web-sys = { version = "0.3", features = ["HtmlAudioElement"] }
 
 [features]
 default = ["web"]
 web = ["dioxus/web"]
 desktop = ["dioxus/desktop"]
 mobile = ["dioxus/mobile"]
-
-[profile]
 
 [profile.wasm-dev]
 inherits = "dev"
