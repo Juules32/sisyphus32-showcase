@@ -41,10 +41,8 @@ enum Route {
 }
 
 fn main() {
-    unsafe { sisyphus32::init(); }
     dioxus::launch(|| {
         tracing::debug!("Rendering app!");
-
         App()
     });
 }
