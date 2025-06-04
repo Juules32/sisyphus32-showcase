@@ -194,19 +194,22 @@ fn InCheckIndicator() -> Element {
     )
 }
 
-#[component]
-fn TargetIndicator(
+#[derive(Props, PartialEq, Clone)]
+struct TargetIndicatorProps {
     target: Square,
     contains_piece: bool,
-) -> Element {
+}
+
+#[component]
+fn TargetIndicator(props: TargetIndicatorProps) -> Element {
     rsx!(
         div {
             class: "target-indicator",
-            onpointerdown: move |_| play_move_handler(target),
+            onpointerdown: move |_| play_move_handler(props.target),
             svg {
                 view_box: "0 0 100 100",
                 fill: "rgba(0, 50, 0, 0.5)",
-                if contains_piece {
+                if props.contains_piece {
                     defs {
                         mask {
                             id: "circle-cutout",
@@ -245,22 +248,28 @@ fn TargetIndicator(
     )
 }
 
+#[derive(Props, PartialEq, Clone)]
+struct PieceComponentProps {
+    square: Square,
+    piece: Piece,
+}
+
 #[component]
-fn PieceComponent(square: Square, piece: Piece) -> Element {
-    let piece_char = char::from(piece);
+fn PieceComponent(props: PieceComponentProps) -> Element {
+    let piece_char = char::from(props.piece);
 
     rsx!(
         img {
             id: "piece-svg",
             src: *get_svg_source(piece_char),
             onpointerdown: move |_| {
-                if SELECTED_SQUARE.read().is_some_and(|sq| sq == square) {
+                if SELECTED_SQUARE.read().is_some_and(|sq| sq == props.square) {
                     SELECTED_SQUARE.signal().set(None);
                 } else {
                     let to_move = CURRENT_GAME.read().to_move();
                     let player_side = CURRENT_GAME.read().player_side();
-                    if piece.color() == player_side && piece.color() == to_move {
-                        SELECTED_SQUARE.signal().set(Some(square));
+                    if props.piece.color() == player_side && props.piece.color() == to_move {
+                        SELECTED_SQUARE.signal().set(Some(props.square));
                     } else {
                         SELECTED_SQUARE.signal().set(None);
                     }
