@@ -2,7 +2,6 @@ use dioxus::prelude::*;
 
 use crate::components::{Layout, Lorem};
 
-/// Home page
 #[component]
 pub fn BSc() -> Element {
     rsx! {

@@ -1,6 +1,5 @@
 use dioxus::prelude::*;
 
-/// Home page
 #[component]
 pub fn Lorem() -> Element {
     rsx! {

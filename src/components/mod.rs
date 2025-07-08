@@ -9,16 +9,16 @@ macro_rules! mod_and_use {
 }
 
 mod_and_use!(
+    bsc,
+    chessboard,
+    chessengines,
+    copy,
+    gamejams,
+    home,
+    layout,
+    lorem,
+    msc,
     navbars,
     navlink,
-    home,
-    aboutprojects,
-    webapps,
-    layout,
-    gamejams,
-    bsc,
-    msc,
-    lorem,
-    chessengines,
-    chessboard
+    webapps
 );

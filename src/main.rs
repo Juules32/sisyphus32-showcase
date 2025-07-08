@@ -23,10 +23,8 @@ enum Route {
             #[end_layout]
         #[end_nest]
         #[nest("/projects")]
-            #[redirect("/", || Route::AboutProjects {})]
+            #[redirect("/", || Route::WebApps {})]
             #[layout(ProjectsNavbar)]
-                #[route("/about")]
-                AboutProjects {},
                 #[route("/apps")]
                 WebApps {},
                 #[route("/jams")]

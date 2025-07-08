@@ -268,3 +268,35 @@ a {
 .chess-game-starter button:hover {
     background-color: #3e1166;
 }
+
+.copy {
+    position: relative;
+    display: inline-block;                  /* Prevents wrapping issues */
+    cursor: pointer;
+}
+
+.copy-text {
+    text-decoration: underline;
+}
+
+.copy-indicator {
+    position: absolute;
+    width: fit-content;
+    left: 50%;
+    text-align: center;
+    transform: translateX(-50%);
+    background-color: #ddd;
+    color: black;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 20;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.copy-indicator.visible {
+    opacity: 0.85;
+    transform: translateX(-50%) translateY(-30px); /* moves upward smoothly */
+}

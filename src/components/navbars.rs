@@ -8,7 +8,7 @@ pub fn OuterNavbar() -> Element {
             class: "navbar outer",
             NavLink { to: Route::Home {}, label: "Home", is_outer: true }
             NavLink { to: Route::BSc {}, label: "ITU", is_outer: true }
-            NavLink { to: Route::AboutProjects {}, label: "Personal Projects", is_outer: true }
+            NavLink { to: Route::WebApps {}, label: "Personal Projects", is_outer: true }
         }
 
         Outlet::<Route> {}
@@ -33,7 +33,6 @@ pub fn ProjectsNavbar() -> Element {
     rsx! {
         div {
             class: "navbar inner",
-            NavLink { to: Route::AboutProjects {}, label: "About", is_outer: false }
             NavLink { to: Route::WebApps {}, label: "Web Apps", is_outer: false }
             NavLink { to: Route::GameJams {}, label: "Game Jams", is_outer: false }
             NavLink { to: Route::ChessEngines {}, label: "Chess Engines", is_outer: false }
