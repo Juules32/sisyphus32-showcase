@@ -9,7 +9,6 @@ macro_rules! mod_and_use {
 }
 
 mod_and_use!(
-    bsc,
     chessboard,
     chessengines,
     copy,
@@ -17,7 +16,6 @@ mod_and_use!(
     home,
     layout,
     lorem,
-    msc,
     navbars,
     navlink,
     webapps

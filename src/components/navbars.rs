@@ -7,21 +7,7 @@ pub fn OuterNavbar() -> Element {
         div {
             class: "navbar outer",
             NavLink { to: Route::Home {}, label: "Home", is_outer: true }
-            NavLink { to: Route::BSc {}, label: "ITU", is_outer: true }
             NavLink { to: Route::WebApps {}, label: "Personal Projects", is_outer: true }
-        }
-
-        Outlet::<Route> {}
-    }
-}
-
-#[component]
-pub fn ItuNavbar() -> Element {
-    rsx! {
-        div {
-            class: "navbar inner",
-            NavLink { to: Route::BSc {}, label: "BSc in Software Development", is_outer: false }
-            NavLink { to: Route::MSc {}, label: "MSc in Games", is_outer: false }
         }
 
         Outlet::<Route> {}
