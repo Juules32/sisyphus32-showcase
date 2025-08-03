@@ -10,7 +10,7 @@ pub fn WebApps() -> Element {
             p {
                 "
                     In my free time, I like to explore new tools and technologies to
-                    build hobby pages.
+                    build hobby pages. This way, I've garnered experience in many web technologies.
                 "
             }
             
@@ -21,7 +21,14 @@ pub fn WebApps() -> Element {
                 p {
                     "
                         PokéLink is a Pokémon-inspired browser game in the \"dle\" genre
-                        (wordle, globle, etc.) 
+                        (wordle, globle, etc.), meaning one new puzzle is generated automatically
+                        every day.
+                        The goal is to get from one Pokémon to another following a set of rules.
+                        The frontend is written in Svelte + Tailwind + TypeScript, and the backend,
+                        which responsible for retrieving Pokémon data, generating puzzles, 
+                        and verifying guesses, among other things, is written in Python and run
+                        with FastAPI. Puzzle and user data is stored in a simple Postgres database,
+                        while puzzle progress is stored in the browser's local storage.
                     "
                 }
                 p {
@@ -40,7 +47,7 @@ pub fn WebApps() -> Element {
                         "here!"
                     }
                 }
-                iframe { src: "https://pokelink.juules32.com/", allowfullscreen: "" }
+                iframe { src: "https://pokelink.juules32.com/" }
             }
 
         }

@@ -7,7 +7,7 @@ pub fn OuterNavbar() -> Element {
         div {
             class: "navbar outer",
             NavLink { to: Route::Home {}, label: "Home", is_outer: true }
-            NavLink { to: Route::WebApps {}, label: "Personal Projects", is_outer: true }
+            NavLink { to: Route::WebApps {}, label: "Projects", is_outer: true }
         }
 
         Outlet::<Route> {}

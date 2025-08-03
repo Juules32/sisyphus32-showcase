@@ -18,7 +18,7 @@ pub fn Home() -> Element {
                 p {
                     "
                         I'm Benjamin aka. Juules32, and welcome to my portfolio website!
-                        I treat my portfolio as a space where I collect and share some personal
+                        I treat my portfolio as a space where I collect and share some
                         projects, apps and games I've built. It's more of a digital playground
                         than a professional résumé, but I've poured real time and care into
                         the things here.

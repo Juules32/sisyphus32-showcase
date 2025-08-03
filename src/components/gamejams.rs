@@ -11,7 +11,7 @@ pub fn GameJams() -> Element {
                 "
                     Over the years, I have participated in a few game jams which are listed below.
                     Keep in mind all of these were made from start to finish in the span of a few
-                    days, so bugs will be plentiful...
+                    days, so bugs will be plentiful... 🐛
                 "
             }
             div {
