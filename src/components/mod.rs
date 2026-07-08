@@ -8,15 +8,4 @@ macro_rules! mod_and_use {
     };
 }
 
-mod_and_use!(
-    chessboard,
-    chessengines,
-    copy,
-    gamejams,
-    home,
-    layout,
-    lorem,
-    navbars,
-    navlink,
-    webapps
-);
+mod_and_use!(chessboard);

@@ -26,6 +26,10 @@ static CURRENT_GAME: GlobalSignal<BotGame> = Signal::global(|| {
 
 static SELECTED_SQUARE: GlobalSignal<Option<Square>> = Signal::global(|| None);
 
+static THINKING_TIME: GlobalSignal<String> = Signal::global(|| String::from("1"));
+
+static SELECTED_SIDE: GlobalSignal<String> = Signal::global(|| String::from("white"));
+
 fn get_svg_source(name: char) -> &'static Asset {
     match name {
         'P' => &WP_SVG,
@@ -284,9 +288,6 @@ fn PieceComponent(props: PieceComponentProps) -> Element {
 pub fn ChessBoard() -> Element {
     tracing::debug!("Reloaded board component!");
 
-    let mut thinking_time = use_signal(|| String::from("1"));
-    let mut selected_side = use_signal(|| String::from("white"));
-
     // Reset selected square when current_game changes
     use_effect(move || {
         let _ = CURRENT_GAME.read();
@@ -316,21 +317,6 @@ pub fn ChessBoard() -> Element {
     let last_move = CURRENT_GAME.read().get_last_move();
 
     let in_check = CURRENT_GAME.read().in_check();
-
-    let mut start_game_handler = {
-        let thinking_time = thinking_time.clone();
-        let mut current_game = CURRENT_GAME.signal();
-        move || {
-            let seconds = thinking_time.read().parse::<u128>().unwrap_or(1);
-            let side = match selected_side.read().to_lowercase().as_str() {
-                "black" => Color::Black,
-                _ => Color::White,
-            };
-            tracing::debug!("Started game!");
-            play_sound(&START.to_string());
-            current_game.set(BotGame::new(side, seconds * 1000));
-        }
-    };
 
     let piece_map = CURRENT_GAME.read().get_piece_map();
 
@@ -386,42 +372,68 @@ pub fn ChessBoard() -> Element {
 
     rsx! {
         div {
-            class: "board-wrapper",
+            class: "chess-game-container",
             div {
-                id: "board",
-                oncontextmenu: move |e| e.prevent_default(),
-                class: "chess-board",
-                for square in squares {
-                    {square}
+                class: "board-wrapper",
+                div {
+                    id: "board",
+                    oncontextmenu: move |e| e.prevent_default(),
+                    class: "chess-board",
+                    for square in squares {
+                        {square}
+                    }
+                }
+            }
+        }
+    }
+}
+
+#[component]
+pub fn MatchSettings() -> Element {
+    let mut thinking_time = THINKING_TIME.signal();
+    let mut selected_side = SELECTED_SIDE.signal();
+
+    let mut start_game_handler = {
+        let mut current_game = CURRENT_GAME.signal();
+        move || {
+            let seconds = thinking_time.read().parse::<u128>().unwrap_or(1);
+            let side = match selected_side.read().to_lowercase().as_str() {
+                "black" => Color::Black,
+                _ => Color::White,
+            };
+            tracing::debug!("Started game!");
+            play_sound(&START.to_string());
+            current_game.set(BotGame::new(side, seconds * 1000));
+        }
+    };
+
+    rsx! {
+        div {
+            class: "chess-game-starter",
+            div {
+                class: "setting-row",
+                label { r#for: "thinking-time", "Bot thinking time (seconds): " }
+                input {
+                    id: "thinking-time",
+                    r#type: "number",
+                    min: "1",
+                    max: "15",
+                    value: "{thinking_time}",
+                    oninput: move |e| thinking_time.set(e.value()),
                 }
             }
             div {
-                class: "chess-game-starter",
-                div {
-
-                    label { r#for: "thinking-time", "Bot thinking time (seconds): " }
-                    input {
-                        id: "thinking-time",
-                        r#type: "number",
-                        min: "1",
-                        max: "100",
-                        value: "{thinking_time}",
-                        oninput: move |e| thinking_time.set(e.value()),
-                    }
+                class: "setting-row",
+                label { r#for: "side-select", "Playing side: " }
+                select {
+                    id: "side-select",
+                    value: "{selected_side}",
+                    oninput: move |e| selected_side.set(e.value()),
+                    option { value: "white", "White" }
+                    option { value: "black", "Black" }
                 }
-                div {
-
-                    label { r#for: "side-select", style: "margin-left: 12px;", "Side: " }
-                    select {
-                        id: "side-select",
-                        value: "{selected_side}",
-                        oninput: move |e| selected_side.set(e.value()),
-                        option { value: "white", "White" }
-                        option { value: "black", "Black" }
-                    }
-                }
-                button { style: "margin-left: 12px;", onclick: move |_| start_game_handler(), "New Game" }
             }
+            button { onclick: move |_| start_game_handler(), "New Game" }
         }
     }
 }

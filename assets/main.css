@@ -15,143 +15,77 @@ a {
     color: #551a8b;
 }
 
-.navbar {
-    overflow-x: auto;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    position: relative;
-    justify-content: center;
-    min-height: 50px;
-    box-shadow: 0 4px 5px -2px gray;
-}
-
-#pokelink iframe {
-    border: 2px solid gray;
-    border-radius: 10px;
-    height: 650px;
-    width: 100%;
-}
-
-#itch-widget {
-    max-width: 440px;
-    min-width: 321px;
-    box-shadow: 0 4px 5px -2px gray;
-}
-
-@media (max-width: 600px) {
-    #pokelink iframe, #pokelink #playbelow {
-        display: none;
-    }
-}
-
-@media (min-width: 601px) {
-    #pokelink #playlink {
-        display: none;
-    }
-}
-
-.gamejam-entry {
-    display: flex;
-    gap: 20px;
-    margin: 20px 0px;
-}
-
-@media (max-width: 1100px) {
-    .gamejam-entry {
-        flex-direction: column;
-    }
-
-    #itch-widget {
-        min-width: 0px;
-    }
-}
-
-.navlink {
-    position: relative;
-    padding: 6px 10px;
-    margin: 0px 5px;
-    text-align: center;
-    text-decoration: none;
-    color: #551a8b;
-    background-image: linear-gradient(to top, #dddddd, transparent);
-    background-size: 100% 0%;
-    background-repeat: no-repeat;
-    background-position: bottom;
-    border-radius: 10px;
-    transition: background-size 0.2s ease, color 0.2s ease;
-}
-
-.navbar a:hover {
-    background-size: 100% 100%;                             /* Animate gradient upwards */
-    color: #000000;
-    cursor: pointer;
-}
-
-.navlink.active {
-    background-size: 100% 100%;                             /* Animate gradient upwards */
-    color: #000000;
-    size: 100px;
-    text-shadow:0px 0px 0.5px black;
-}
-
-.navbar.outer {
-    z-index: 3;
-    position: sticky;
-    top: 0;
-    border-radius: 0px 0px 15px 15px;
-}
-
-.navbar.inner {
-    z-index: 2;
-    position: sticky;
-    top: 50;
-    padding-top: 15px;
-    transform: translateY(-15px);
-    background-color: #eeeef9;
-    border-radius: 0px 0px 15px 15px;
-}
-
-#layout-content {
-    transform: translateY(-15px);
+.showcase {
     box-sizing: border-box;
-    overflow: hidden;
-    background-color: #ffffff;
-    max-width: 1000px;                                      /* Excluding padding */
-    width: calc(75%);                                       /* Excluding padding */
-    margin-bottom: 4%;                                      /* A little space at the bottom */
-    padding: max(3%, 5px) max(5%, 20px);                    /* Gotta have padding! */
-    box-shadow: 4px 4px 10px 2px gray;
-    border-radius: 0px 0px 15px 15px;
+    max-width: 1690px;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: min(7vh, 150px);
+    font-size: 1.1rem;
+
+    display: grid;
+    /* Board column shrinks with viewport height (down to a floor), same as the
+       stacked layout; the text column keeps its width */
+    grid-template-columns: minmax(0, clamp(300px, 90vh, 650px)) minmax(0, 364px);
+    grid-template-areas:
+        "title title"
+        "game  text";
+    column-gap: 52px;
+    align-items: start;
+    justify-content: center;
 
     h1, h2, h3, h4, h5 {
         color: #551a8b;                                   /* Purpl burglur alurm */
     }
 
-    @media (max-width: 600px) {
-        width: 92%;
+    /* Narrow displays: title, settings, board, text stacked vertically */
+    @media (max-width: 900px) or (max-height: 515px) {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "title"
+            "game"
+            "text";
+        /* Keep all content no wider than the board, and shrink the board (plus the
+           rest of the vertical content) as the viewport gets shorter, down to a floor */
+        max-width: clamp(300px, 90vh, 650px);
     }
 }
 
-#layout-background {
-    /* Center content! */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.showcase > h1 {
+    grid-area: title;
+    margin-top: 0;
 }
 
-.board-centerer {
-    display: flex;
-    justify-content: center;
+.chess-game-container {
+    grid-area: game;
+}
+
+.text-column {
+    grid-area: text;
+}
+
+.text-column p {
+    margin-top: 0;
+}
+
+/* Separator above the description — only shown in the wide two-column view */
+.text-separator {
+    border: none;
+    border-top: 1px solid #b3b3c2;
+    margin: 0 0 21px;
+}
+
+@media (max-width: 900px) or (max-height: 515px) {
+    /* Extra breathing room between the board and the "Match settings" heading */
+    .text-column {
+        margin-top: 42px;
+    }
 }
 
 .board-wrapper {
     aspect-ratio: 1;
-    width: 75%;
-
-    @media (max-width: 800px) {
-        width: 100%;
-    }
+    width: 100%;
+    max-width: 650px;
 }
 
 #board {
@@ -161,9 +95,9 @@ a {
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
     cursor: pointer;
-    border: 6px solid #8b5e3c; /* Wood-like brown */
-    border-radius: 6px;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.2), 0 4px 8px rgba(0,0,0,0.1);
+    border: 8px solid #8b5e3c; /* Wood-like brown */
+    border-radius: 8px;
+    box-shadow: inset 0 0 13px rgba(0,0,0,0.2), 0 5px 10px rgba(0,0,0,0.1);
     background-color: #e0c9a6; /* Optional background around board */
     box-sizing: border-box; /* ✅ KEY LINE */
 }
@@ -222,92 +156,56 @@ a {
     z-index: 0;
 }
 
+.match-settings-heading {
+    margin: 0 0 13px;
+    font-size: 1.6rem;
+}
+
 .chess-game-starter {
     display: flex;
-    justify-content: flex-end;       /* Push content to the right */
-    align-items: center;             /* Vertically center items */
-    gap: 10px;                       /* Space between items */
-    margin-top: 12px;                /* Space from the board */
-    flex-wrap: wrap;                 /* Allow wrapping on small screens */
+    flex-direction: column;          /* One row per setting */
+    align-items: stretch;            /* Rows fill the section width */
+    gap: 13px;                       /* Space between rows */
+    margin-bottom: 21px;             /* Space above the board */
+}
 
-    @media (max-width: 800px) {
-        flex-direction: column;
-        align-items: end;
-    }
+.chess-game-starter .setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  /* Label left, control pushed right */
+    gap: 10px;
 }
 
 .chess-game-starter input,
 .chess-game-starter select {
-    padding: 4px 8px;
+    padding: 5px 10px;
     border: 1px solid #aaa;
-    border-radius: 6px;
+    border-radius: 8px;
     background-color: #f8f8fc;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
-.chess-game-starter #thinking-time {
-    max-width: 59px;
+/* Inputs and the button are pushed right and share a single width */
+.chess-game-starter input,
+.chess-game-starter select,
+.chess-game-starter button {
+    box-sizing: border-box;
+    width: 124px;
 }
 
 .chess-game-starter button {
-    padding: 6px 12px;
+    align-self: flex-end;            /* Push the button to the right */
+    padding: 8px 16px;
     background-color: rgb(124, 97, 151);
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.1rem;
     transition: background-color 0.3s ease;
 }
 
 .chess-game-starter button:hover {
     background-color: #3e1166;
-}
-
-.copy {
-    position: relative;
-    display: inline-block;                  /* Prevents wrapping issues */
-    cursor: pointer;
-}
-
-.copy-text {
-    text-decoration: underline;
-}
-
-.copy-indicator {
-    position: absolute;
-    width: fit-content;
-    left: 50%;
-    text-align: center;
-    transform: translateX(-50%);
-    background-color: #ddd;
-    color: black;
-    padding: 4px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    z-index: 20;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.copy-indicator.visible {
-    opacity: 0.85;
-    transform: translateX(-50%) translateY(-30px); /* moves upward smoothly */
-}
-
-#profile-photo {
-    width: 40%;
-    max-width: 280px;
-    float: right;
-    margin-left: 20px;
-
-    @media (max-width: 600px) {
-        display: none;
-    }
-}
-
-.gamejam-entry-text {
-    margin-top: 0px;
 }
