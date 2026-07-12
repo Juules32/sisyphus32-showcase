@@ -2,6 +2,8 @@ use dioxus::prelude::*;
 use dioxus_logger::tracing;
 use sisyphus32::{BotGame, Color, MoveFlag, Piece, Position, Square};
 use gloo_timers::future::TimeoutFuture;
+use std::cell::RefCell;
+use std::collections::HashMap;
 
 const WP_SVG: Asset = asset!("/assets/piece_svg/WP.svg");
 const WN_SVG: Asset = asset!("/assets/piece_svg/WN.svg");
@@ -56,9 +58,42 @@ const CHECK: Asset = asset!("/assets/sounds/check.mp3");
 const MATE: Asset = asset!("/assets/sounds/mate.mp3");
 const START: Asset = asset!("/assets/sounds/start.mp3");
 
+// Audio elements are cached and reused so that the file is fetched/decoded only once. 
+thread_local! {
+    static AUDIO_CACHE: RefCell<HashMap<String, web_sys::HtmlAudioElement>> = RefCell::new(HashMap::new());
+}
+
 fn play_sound(name: &str) {
-    let result = web_sys::HtmlAudioElement::new_with_src(name);
-    result.ok().and_then(|res| res.play().ok());
+    AUDIO_CACHE.with(|cache| {
+        let mut cache = cache.borrow_mut();
+        if !cache.contains_key(name) {
+            if let Ok(audio) = web_sys::HtmlAudioElement::new_with_src(name) {
+                audio.set_preload("auto");
+                cache.insert(name.to_string(), audio);
+            }
+        }
+        if let Some(audio) = cache.get(name) {
+            let _ = audio.set_current_time(0.0);
+            let _ = audio.play();
+        }
+    });
+}
+
+// Fetches and decodes every sound up front so the first play of each is instant.
+fn preload_sounds() {
+    AUDIO_CACHE.with(|cache| {
+        let mut cache = cache.borrow_mut();
+        for asset in [&QUIET, &CAPTURE, &CASTLE, &PROMOTE, &CHECK, &MATE, &START] {
+            let src = asset.to_string();
+            if !cache.contains_key(&src) {
+                if let Ok(audio) = web_sys::HtmlAudioElement::new_with_src(&src) {
+                    audio.set_preload("auto");
+                    audio.load();
+                    cache.insert(src, audio);
+                }
+            }
+        }
+    });
 }
 
 fn play_move_sound(previous_position: &Position) {
@@ -287,6 +322,8 @@ fn PieceComponent(props: PieceComponentProps) -> Element {
 #[component]
 pub fn ChessBoard() -> Element {
     tracing::debug!("Reloaded board component!");
+
+    use_hook(preload_sounds);
 
     // Reset selected square when current_game changes
     use_effect(move || {
