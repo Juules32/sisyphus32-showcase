@@ -35,7 +35,7 @@ a {
     justify-content: center;
 
     h1, h2, h3, h4, h5 {
-        color: #551a8b;                                   /* Purpl burglur alurm */
+        color: #551a8b; /* Purpl burglur alurm */
     }
 
     /* Narrow displays: title, settings, board, text stacked vertically */
@@ -98,13 +98,15 @@ a {
     border: 8px solid #8b5e3c; /* Wood-like brown */
     border-radius: 8px;
     box-shadow: inset 0 0 13px rgba(0,0,0,0.2), 0 5px 10px rgba(0,0,0,0.1);
-    background-color: #e0c9a6; /* Optional background around board */
-    box-sizing: border-box; /* ✅ KEY LINE */
+    background-color: #e0c9a6;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Prevent blue tap flash on mobile */
 }
 
 #board * {
     user-select: none;
     -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent; /* Prevent blue tap flash on mobile */
 }
 
 .square {
@@ -163,16 +165,16 @@ a {
 
 .chess-game-starter {
     display: flex;
-    flex-direction: column;          /* One row per setting */
-    align-items: stretch;            /* Rows fill the section width */
-    gap: 13px;                       /* Space between rows */
-    margin-bottom: 21px;             /* Space above the board */
+    flex-direction: column;
+    align-items: stretch;
+    gap: 13px;
+    margin-bottom: 21px;
 }
 
 .chess-game-starter .setting-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;  /* Label left, control pushed right */
+    justify-content: space-between;
     gap: 10px;
 }
 
@@ -195,7 +197,7 @@ a {
 }
 
 .chess-game-starter button {
-    align-self: flex-end;            /* Push the button to the right */
+    align-self: flex-end;
     padding: 8px 16px;
     background-color: rgb(124, 97, 151);
     color: white;
